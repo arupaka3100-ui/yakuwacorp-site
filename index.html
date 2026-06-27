@@ -90,33 +90,62 @@
       background: #fff;
     }
     .hero {
-      padding: 54px 0 40px;
-      display: grid;
-      gap: 28px;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
+      position: relative;
+      min-height: calc(100svh - 72px);
+      display: flex;
+      align-items: flex-end;
+      padding: 0;
+      margin-top: 0;
+      overflow: hidden;
+      border-radius: 0 0 36px 36px;
+      box-shadow: var(--shadow);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8,30,33,0.84) 0%, rgba(8,30,33,0.54) 38%, rgba(8,30,33,0.14) 100%);
+      z-index: 1;
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(620px, calc(100% - 32px));
+      padding: 48px 0 48px 0;
+      margin: 0 auto;
+      color: #fff;
     }
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       border-radius: 999px;
-      background: var(--surface-2);
-      color: var(--accent);
+      background: rgba(255,255,255,0.16);
+      color: #fff;
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       margin-bottom: 16px;
+      backdrop-filter: blur(10px);
     }
     .hero h1 {
       font-family: 'Noto Serif JP', serif;
-      font-size: clamp(1.95rem, 3vw, 3rem);
-      line-height: 1.45;
+      font-size: clamp(2rem, 3.8vw, 3.3rem);
+      line-height: 1.4;
       margin: 0 0 16px;
       letter-spacing: 0.02em;
+      text-shadow: 0 8px 25px rgba(0,0,0,0.25);
     }
-    .hero p { font-size: 1rem; color: var(--muted); margin: 0 0 24px; }
+    .hero p { font-size: 1rem; color: rgba(255,255,255,0.9); margin: 0 0 24px; max-width: 560px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
     .stats {
       display: grid;
@@ -125,30 +154,16 @@
       margin-top: 6px;
     }
     .stat {
-      background: var(--surface);
-      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 18px;
       padding: 16px 12px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.16);
       text-align: center;
+      backdrop-filter: blur(10px);
     }
-    .stat strong { display: block; font-size: 1.2rem; color: var(--accent); }
-    .stat span { font-size: 0.82rem; color: var(--muted); }
-    .hero-card {
-      background: linear-gradient(135deg, rgba(31,110,94,0.95), rgba(16,53,47,0.95));
-      border-radius: 32px;
-      padding: 26px;
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-    .hero-card h2 { font-size: 1.12rem; margin: 0 0 10px; }
-    .hero-card ul { padding-left: 18px; margin: 0; display: grid; gap: 10px; }
-    .hero-card li { color: rgba(255,255,255,0.9); }
-    .hero-image {
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
+    .stat strong { display: block; font-size: 1.2rem; color: #fff; }
+    .stat span { font-size: 0.82rem; color: rgba(255,255,255,0.84); }
     .section {
       padding: 54px 0;
     }
@@ -297,11 +312,12 @@
   </header>
 
   <main id="top">
-    <section class="hero container">
-      <div>
+    <section class="hero">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1626800278619-5c2f3fd3b98f?auto=format&fit=crop&w=1600&q=80" alt="洗濯機の洗浄イメージ" />
+      <div class="container hero-content">
         <div class="eyebrow">東京都・埼玉県対応 / 分解洗浄 / 1か月保証付き</div>
         <h1>洗濯機の臭い・カビ・黒ずみを、根本から解決します。</h1>
-        <p>見えない洗濯槽内部の汚れを分解して徹底洗浄。お客様の大切な洗濯機を、安心して長く使える状態へ整えます。</p>
+        <p>見えない洗濯槽内部の汚れを分解して徹底洗浄。水しぶきや汚れの気になる症状を、すぐに改善できるように対応します。</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">今すぐ無料相談</a>
           <a href="#price" class="btn btn-outline">料金を見る</a>
@@ -311,9 +327,6 @@
           <div class="stat"><strong>96%</strong><span>リピート率</span></div>
           <div class="stat"><strong>95%</strong><span>満足度</span></div>
         </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt="洗濯機クリーニングの作業イメージ" />
       </div>
     </section>
 
@@ -342,7 +355,7 @@
       <p class="section-lead">一般的な洗濯槽クリーナーでは取れない、内部の奥まで徹底的に洗浄します。</p>
       <div class="service-grid">
         <div class="service-figure">
-          <img src="https://images.unsplash.com/photo-1626800278619-5c2f3fd3b98f?auto=format&fit=crop&w=900&q=80" alt="分解洗浄の作業風景" />
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80" alt="洗濯機の洗浄作業イメージ" />
         </div>
         <div class="card">
           <div class="pill-list">
